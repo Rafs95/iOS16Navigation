@@ -107,17 +107,32 @@ The **Explore** tab in the application contains buttons that dispatch demo URLs 
 Ensure your simulator is booted and the app is active, then execute the following commands in your shell:
 
 #### 1. Navigate to a Post Detail (Valid)
+Using Custom Scheme:
+```bash
+xcrun simctl openurl booted "com.arafs.iOS16Navigation://post/p1"
+```
+Using HTTPS Universal Link:
 ```bash
 xcrun simctl openurl booted "https://www.example.com/post/p1"
 ```
 
 #### 2. Navigate to Comments (Valid)
 Pushes the Post Detail view followed by the Comments view onto the stack:
+Using Custom Scheme:
 ```bash
-xcrun simctl openurl booted "https://www.example.com/post/p2/comments"
+xcrun simctl openurl booted "com.arafs.iOS16Navigation://comments/post-comment-prompts"
+```
+Using HTTPS Universal Link:
+```bash
+xcrun simctl openurl booted "https://www.example.com/comments/post-comment-prompts"
 ```
 
 #### 3. Navigate to a User Profile (Valid)
+Using Custom Scheme:
+```bash
+xcrun simctl openurl booted "com.arafs.iOS16Navigation://profile/alice_w"
+```
+Using HTTPS Universal Link:
 ```bash
 xcrun simctl openurl booted "https://www.example.com/profile/alice_w"
 ```
@@ -125,10 +140,10 @@ xcrun simctl openurl booted "https://www.example.com/profile/alice_w"
 #### 4. Invalid Entity ID (Triggers Error Sheet)
 Requests a post that does not exist in the mock dataset:
 ```bash
-xcrun simctl openurl booted "https://www.example.com/post/p999"
+xcrun simctl openurl booted "com.arafs.iOS16Navigation://post/p999"
 ```
 
 #### 5. Unsupported Host/Path (Triggers Error Sheet)
 ```bash
-xcrun simctl openurl booted "https://www.google.com"
+xcrun simctl openurl booted "com.arafs.iOS16Navigation://invalid"
 ```

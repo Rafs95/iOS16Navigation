@@ -21,10 +21,24 @@ public final class AppLinkHandler {
     }
 
     public func resolve(url: URL) async throws -> AppLinkDestination {
-        guard let handler = handlers.first(where: { $0.identifier.matches(url: url) }) else {
+        var targetURL = url
+        if url.scheme?.lowercased() == "com.arafs.ios16navigation" {
+            let hostComponent = url.host ?? ""
+            let pathComponent = url.path
+            var components = URLComponents()
+            components.scheme = "https"
+            components.host = "www.example.com"
+            components.path = "/" + hostComponent + pathComponent
+            components.query = url.query
+            if let normalizedURL = components.url {
+                targetURL = normalizedURL
+            }
+        }
+
+        guard let handler = handlers.first(where: { $0.identifier.matches(url: targetURL) }) else {
             throw LinkHandlerError.unsupportedURL
         }
 
-        return try await handler.resolve(url: url)
+        return try await handler.resolve(url: targetURL)
     }
 }

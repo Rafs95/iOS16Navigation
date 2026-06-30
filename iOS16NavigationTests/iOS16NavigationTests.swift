@@ -78,4 +78,20 @@ struct iOS16NavigationTests {
         #expect(coordinator.canDisplay(.profile(username: "missing-user")) == false)
     }
 
+    @MainActor
+    @Test func customSchemePostDeepLinkResolvesToPostDestination() async throws {
+        let handler = AppLinkHandler()
+        let destination = try await handler.resolve(url: URL(string: "com.arafs.iOS16Navigation://post/post-swiftui-loading")!)
+
+        #expect(destination == .post(id: "post-swiftui-loading"))
+    }
+
+    @MainActor
+    @Test func customSchemeCommentsDeepLinkResolvesToCommentsDestination() async throws {
+        let handler = AppLinkHandler()
+        let destination = try await handler.resolve(url: URL(string: "com.arafs.iOS16Navigation://comments/post-comment-prompts")!)
+
+        #expect(destination == .comments(postID: "post-comment-prompts"))
+    }
+
 }
