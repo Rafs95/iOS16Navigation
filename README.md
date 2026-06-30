@@ -12,24 +12,24 @@ Below is the state transitions and routing topology managed by the centralized c
 
 ```mermaid
 flowchart TD
-    subgraph Root Switcher (AppCoordinator)
+    subgraph "Root Switcher (AppCoordinator)"
         SplashView[Splash View] -- Delay --> LoginView[Login View]
         LoginView -- Authenticate --> MainTabView[Main Tab View]
     end
 
-    subgraph Main Tab View (Root = .main)
+    subgraph "Main Tab View (Root = .main)"
         FeedTab[Feed Tab]
         ExploreTab[Explore Tab]
         ProfileTab[Profile Tab]
     end
 
-    subgraph Top-level NavigationStack (Push Routes)
+    subgraph "Top-level NavigationStack (Push Routes)"
         PostDetailView[Post Detail View]
         CommentsView[Comments View]
         UserProfileView[User Profile View]
     end
 
-    subgraph Custom Modal Surfaces (AppSurface)
+    subgraph "Custom Modal Surfaces (AppSurface)"
         LoadingOverlay[Loading Overlay]
         ErrorSheet[Error Alert Sheet]
         ForceUpdateSheet[Force Update Sheet]

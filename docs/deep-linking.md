@@ -10,7 +10,7 @@ The deep link subsystem is decoupled from the UI. It uses a **Chain of Responsib
 
 ```mermaid
 sequenceDiagram
-    participant OS as iOS System (onOpenURL)
+    participant OS as "iOS System (onOpenURL)"
     participant AC as AppCoordinator
     participant LH as AppLinkHandler
     participant H as Specific LinkHandler
